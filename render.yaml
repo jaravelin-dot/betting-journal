@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: betting-journal
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    disk:
+      name: betting-journal-disk
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: BETJOURNAL_DB
+        value: /var/data/betting_journal.sqlite3
